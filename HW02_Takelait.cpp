@@ -19,6 +19,51 @@ void printArray(const vector<T>& arr) {
     cout << "]" << endl;
 }
 
+// Function to find the minimum value in an array
+int findMin(const vector<int>& arr) {
+    int minVal = arr[0];
+    for (int i = 1; i < arr.size(); i++) {
+        if (arr[i] < minVal) {
+            minVal = arr[i];
+        }
+    }
+    return minVal;
+}
+
+// Function to find the maximum value in an array
+int findMax(const vector<int>& arr) {
+    int maxVal = arr[0];
+    for (int i = 1; i < arr.size(); i++) {
+        if (arr[i] > maxVal) {
+            maxVal = arr[i];
+        }
+    }
+    return maxVal;
+}
+
+// Function to sort an array
+void bubbleSort(vector<int>& arr) {
+    int n = arr.size();
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
+
+// Function to find the median value in an array
+int findMedian(vector<int> arr) {
+    bubbleSort(arr);
+    int n = arr.size();
+    if (n % 2 == 1) {
+        return arr[n / 2];
+    } else {
+        return (arr[n / 2 - 1] + arr[n / 2]) / 2;
+    }
+}
+
 // Exercise 1: Minimum swaps to bring elements less than pivot to the front
 void exercise1() {
     vector<int> arr = {7, 2, 9, 1, 6, 8, 3, 5, 12, 4, 11, 10};
@@ -92,15 +137,17 @@ void exercise4() {
     vector<int> arr = {10, 3, 5, 2, 8, 7, 6};
     cout << "Exercise 4: Sort and find min, max, median" << endl;
     cout << "Input array: ";
-    printArray(arr);
+    for (int num : arr) cout << num << " ";
+    cout << endl;
     
-    sort(arr.begin(), arr.end());
-    int min = arr.front();
-    int max = arr.back();
-    int median = arr[arr.size() / 2]; // For odd-sized array
+    bubbleSort(arr);
+    int min = findMin(arr);
+    int max = findMax(arr);
+    int median = findMedian(arr);
     
     cout << "Output sorted array: ";
-    printArray(arr);
+    for (int num : arr) cout << num << " ";
+    cout << endl;
     cout << "Min: " << min << ", Max: " << max << ", Median: " << median << endl << endl;
 }
 
@@ -165,11 +212,24 @@ void exercise6() {
 }
 
 int main() {
+    cout << "\n Fouzi Takelait\n CSCI 588\n Homework #2\n" << endl;
+
     exercise1();
+    cout << "------------------------------------------------------------------------------------------------------------" << endl;
+
     exercise2();
+    cout << "------------------------------------------------------------------------------------------------------------" << endl;
+
     exercise3();
+    cout << "------------------------------------------------------------------------------------------------------------" << endl;
+
     exercise4();
+    cout << "------------------------------------------------------------------------------------------------------------" << endl;
+
     exercise5();
+    cout << "------------------------------------------------------------------------------------------------------------" << endl;
+
     exercise6();
+
     return 0;
 }
